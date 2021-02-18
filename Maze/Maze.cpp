@@ -62,7 +62,10 @@ void mazeTraverse(char maze[12][12], int size, int xCurrent, int yCurrent,
     maze[xCurrent][yCurrent] = 'X'; // Places an X at current position
 
     // Decide if maze has been solved
+    if (!isSolved(size, xCurrent, yCurrent))
+    {
 
+    }
     // Check if current position is start position (meaning unsolvable)
 
     // Cycle through direction possibilities
@@ -74,12 +77,13 @@ void mazeTraverse(char maze[12][12], int size, int xCurrent, int yCurrent,
 // Determine if moving to a specified position in a maze is allowed
 bool validMove(char maze[12][12], int xCoord, int yCoord)
 {
+
     return false;
 }
 
 
 // Determines if exit of maze has been found
-bool isSolved(int size, int xCoord, int yCoord)
+bool isSolved(int size, int xCurrent, int yCurrent)
 {
     return false;
 }
