@@ -14,11 +14,12 @@ Signature: Andrew Kim
 
 using namespace std;
 
-const enum ENTRANCE { X = 0, Y = 2 };
+const enum ENTRANCE { X = 0, Y = 2 }; // Position of entrance to maze
 
 void mazeTraverse(char[12][12], int, int, int, int);
 bool validMove(char[12][12], int, int);
 bool isSolved(int, int, int);
+void printMaze(char[12][12], int);
 
 
 int main()
@@ -50,12 +51,7 @@ int main()
     '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'
     };
 
-    for (int i = 0; i < 12; i++)
-    {
-        for (int j = 0; j < 12; j++)
-            cout << maze[i][j] << ' ';
-        cout << endl;
-    }
+    printMaze(maze, 12);
 }
 
 
@@ -86,4 +82,16 @@ bool validMove(char maze[12][12], int xCoord, int yCoord)
 bool isSolved(int size, int xCoord, int yCoord)
 {
     return false;
+}
+
+
+// Prints the maze
+void printMaze(char maze[12][12], int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < size; j++)
+            cout << maze[i][j] << ' ';
+        cout << endl;
+    }
 }
