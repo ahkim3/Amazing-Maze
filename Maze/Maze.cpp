@@ -59,10 +59,19 @@ int main()
 }
 
 
-// Executes tasks for each step in maze, marking an X at current position
+// Executes tasks for each step in maze
 void mazeTraverse(char maze[12][12], int size, int xCurrent, int yCurrent, 
     int nextDirection)
 {
+    maze[xCurrent][yCurrent] = 'X'; // Places an X at current position
+
+    // Decide if maze has been solved
+
+    // Check if current position is start position (meaning unsolvable)
+
+    // Cycle through direction possibilities
+        // NTS: For each that would give a valid move, make a recursive call 
+        // which will involve taking a step in that direction
 }
 
 
