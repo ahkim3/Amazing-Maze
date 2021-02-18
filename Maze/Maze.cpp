@@ -14,7 +14,7 @@ Signature: Andrew Kim
 
 using namespace std;
 
-const enum ENTRANCE { X = 0, Y = 2 }; // Position of entrance to maze
+const enum ENTRANCE { beginX = 0, beginY = 2 }; // Position of entrance to maze
 
 void mazeTraverse(char[12][12], int, int, int, int);
 bool validMove(char[12][12], int, int);
