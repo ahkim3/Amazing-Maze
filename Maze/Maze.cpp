@@ -63,6 +63,7 @@ void mazeTraverse(char maze[12][12], int size, int xCurrent, int yCurrent,
     Direction nextDirection)
 {
     bool directionFound;
+    int directionCount = 0;
 
     maze[xCurrent][yCurrent] = 'X'; // Places an X at current position
 
@@ -79,6 +80,8 @@ void mazeTraverse(char maze[12][12], int size, int xCurrent, int yCurrent,
         // Cycle through direction possibilities to find a valid direction
         while (!directionFound)
         {
+            directionCount = 0;
+
             // Tests a single direction
             switch (nextDirection)
             {
@@ -103,6 +106,8 @@ void mazeTraverse(char maze[12][12], int size, int xCurrent, int yCurrent,
             // Moves onto a different direction if original wasn't valid
             if (!directionFound)
             {
+                directionCount++;
+
                 switch (nextDirection)
                 {
                 case Direction::DOWN:
@@ -120,28 +125,24 @@ void mazeTraverse(char maze[12][12], int size, int xCurrent, int yCurrent,
                 }
             }
         }
-
+        
         // Move onto next step in maze
         switch (nextDirection)
         {
         case Direction::DOWN:
-            mazeTraverse(maze, size, xCurrent, yCurrent + 1, nextDirection);
+            mazeTraverse(maze, size, xCurrent, yCurrent + 1, Direction::LEFT);
             break;
         case Direction::RIGHT:
-            mazeTraverse(maze, size, xCurrent + 1, yCurrent, nextDirection);
+            mazeTraverse(maze, size, xCurrent + 1, yCurrent, Direction::DOWN);
             break;
         case Direction::UP:
-            mazeTraverse(maze, size, xCurrent, yCurrent - 1, nextDirection);
+            mazeTraverse(maze, size, xCurrent, yCurrent - 1, Direction::RIGHT);
             break;
         case Direction::LEFT:
-            mazeTraverse(maze, size, xCurrent - 1, yCurrent, nextDirection);
+            mazeTraverse(maze, size, xCurrent - 1, yCurrent, Direction::UP);
             break;
         }
     }
-
-    // Cycle through direction possibilities
-        // NTS: For each that would give a valid move, make a recursive call 
-        // which will involve taking a step in that direction
 }
 
 
