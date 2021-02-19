@@ -73,7 +73,7 @@ void mazeTraverse(char maze[12][12], int size, int& xCurrent, int& yCurrent,
         maze[xCurrent][yCurrent] = 'X'; // Places an X at current position
 
         // Briefly wait and print new step in maze
-        Sleep(30);
+        Sleep(100);
         system("cls");
         printMaze(maze, size);
 
