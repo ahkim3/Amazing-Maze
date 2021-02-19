@@ -64,7 +64,6 @@ void mazeTraverse(char maze[12][12], int size, int xCurrent, int yCurrent,
     Direction nextDirection)
 {
     bool directionFound;
-    int directionCount = 0;
 
     maze[xCurrent][yCurrent] = 'X'; // Places an X at current position
 
@@ -78,54 +77,37 @@ void mazeTraverse(char maze[12][12], int size, int xCurrent, int yCurrent,
     {
         directionFound = false;
 
-        // Cycle through direction possibilities to find a valid direction
+        // Cycle through directions while a valid direction is not found
         while (!directionFound)
         {
-            directionCount = 0;
-
-            // Tests a direction 
+            // Tests a direction, moves onto a different direction not valid
             switch (nextDirection)
             {
             case Direction::DOWN:
                 if (validMove(maze, xCurrent, yCurrent + 1))
                     directionFound = true;
                 else
-                {
-                    directionCount++;
                     nextDirection = Direction::RIGHT;
-                }
                 break;
             case Direction::RIGHT:
                 if (validMove(maze, xCurrent + 1, yCurrent))
                     directionFound = true;
                 else
-                {
-                    directionCount++;
                     nextDirection = Direction::UP;
-                }
                 break;
             case Direction::UP:
                 if (validMove(maze, xCurrent, yCurrent - 1))
                     directionFound = true;
                 else
-                {
-                    directionCount++;
                     nextDirection = Direction::LEFT;
-                }
                 break;
             case Direction::LEFT:
                 if (validMove(maze, xCurrent - 1, yCurrent))
                     directionFound = true;
                 else
-                {
-                    directionCount++;
                     nextDirection = Direction::DOWN;
-                }
                 break;
             }
-
-            // Moves onto a different direction if original wasn't valid
-            
         }
         
         // Move onto next step in maze
