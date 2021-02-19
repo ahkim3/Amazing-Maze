@@ -83,48 +83,49 @@ void mazeTraverse(char maze[12][12], int size, int xCurrent, int yCurrent,
         {
             directionCount = 0;
 
-            // Tests a single direction
+            // Tests a direction 
             switch (nextDirection)
             {
             case Direction::DOWN:
                 if (validMove(maze, xCurrent, yCurrent + 1))
                     directionFound = true;
+                else
+                {
+                    directionCount++;
+                    nextDirection = Direction::RIGHT;
+                }
                 break;
             case Direction::RIGHT:
                 if (validMove(maze, xCurrent + 1, yCurrent))
                     directionFound = true;
+                else
+                {
+                    directionCount++;
+                    nextDirection = Direction::UP;
+                }
                 break;
             case Direction::UP:
                 if (validMove(maze, xCurrent, yCurrent - 1))
                     directionFound = true;
+                else
+                {
+                    directionCount++;
+                    nextDirection = Direction::LEFT;
+                }
                 break;
             case Direction::LEFT:
                 if (validMove(maze, xCurrent - 1, yCurrent))
                     directionFound = true;
+                else
+                {
+                    directionCount++;
+                    nextDirection = Direction::DOWN;
+                }
                 break;
             }
 
             // Moves onto a different direction if original wasn't valid
-            if (!directionFound)
-            {
-                directionCount++;
-
-                switch (nextDirection)
-                {
-                case Direction::DOWN:
-                    nextDirection = Direction::RIGHT;
-                    break;
-                case Direction::RIGHT:
-                    nextDirection = Direction::UP;
-                    break;
-                case Direction::UP:
-                    nextDirection = Direction::LEFT;
-                    break;
-                case Direction::LEFT:
-                    nextDirection = Direction::DOWN;
-                    break;
-                }
-            }
+            
         }
         
         // Move onto next step in maze
