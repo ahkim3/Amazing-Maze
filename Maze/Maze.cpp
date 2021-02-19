@@ -27,36 +27,9 @@ void printMaze(char[12][12], int);
 
 int main()
 {
-    // Initializes maze
     char maze[12][12];
 
     fill(maze, 12, "Maze.txt");
-        
-        /*= {
-    '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#',
-
-    '#', '.', '.', '.', '#', '.', '.', '.', '.', '.', '.', '#',
-
-    '.', '.', '#', '.', '#', '.', '#', '#', '#', '#', '.', '#',
-
-    '#', '#', '#', '.', '#', '.', '.', '.', '.', '#', '.', '#',
-
-    '#', '.', '.', '.', '.', '#', '#', '#', '.', '#', '.', '.',
-
-    '#', '#', '#', '#', '.', '#', '.', '#', '.', '#', '.', '#',
-
-    '#', '.', '.', '#', '.', '#', '.', '#', '.', '#', '.', '#',
-
-    '#', '#', '.', '#', '.', '#', '.', '#', '.', '#', '.', '#',
-
-    '#', '.', '.', '.', '.', '.', '.', '.', '.', '#', '.', '#',
-
-    '#', '#', '#', '#', '#', '#', '.', '#', '#', '#', '.', '#',
-
-    '#', '.', '.', '.', '.', '.', '.', '#', '.', '.', '.', '#',
-
-    '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'
-    };*/
 
     Direction nextDirection = Direction::DOWN; // Initial direction attempt
 
@@ -99,7 +72,7 @@ void mazeTraverse(char maze[12][12], int size, int xCurrent, int yCurrent,
 
     // Continues onto next position if maze is neither solved nor unsolvable
     if (!(isSolved(size, xCurrent, yCurrent) 
-        || (xCurrent == BEGIN_X && yCurrent == BEGIN_Y)))
+        && (xCurrent == BEGIN_X && yCurrent == BEGIN_Y)))
     {
         // Cycle through direction possibilities
         if (validMove(maze, xCurrent, yCurrent))
