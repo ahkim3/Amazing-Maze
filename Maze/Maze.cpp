@@ -11,12 +11,14 @@ Signature: Andrew Kim
 */
 
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
 const enum Entrance { BEGIN_X = 0, BEGIN_Y = 2 }; // Position of entrance to maze
 enum class Direction {DOWN, RIGHT, UP, LEFT};
 
+void fill(char[12][12], int, string);
 void mazeTraverse(char[12][12], int, int, int, Direction);
 bool validMove(char[12][12], int, int);
 bool isSolved(int, int, int);
@@ -26,7 +28,11 @@ void printMaze(char[12][12], int);
 int main()
 {
     // Initializes maze
-    char maze[12][12] = {
+    char maze[12][12];
+
+    fill(maze, 12, "Maze.txt");
+        
+        /*= {
     '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#',
 
     '#', '.', '.', '.', '#', '.', '.', '.', '.', '.', '.', '#',
@@ -50,12 +56,32 @@ int main()
     '#', '.', '.', '.', '.', '.', '.', '#', '.', '.', '.', '#',
 
     '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'
-    };
+    };*/
 
     Direction nextDirection = Direction::DOWN; // Initial direction attempt
 
     mazeTraverse(maze, 12, BEGIN_X, BEGIN_Y, nextDirection);
     //printMaze(maze, 12);
+}
+
+
+// Fill array with maze from a file
+void fill(char maze[12][12], int size, string inputFileName)
+{
+    string name;
+    ifstream input;
+
+    // Reads file and stores each character in an array element
+    input.open(inputFileName, ios::in);
+    if (input.is_open())
+    {
+        for (int j = 0; j < size; j++)
+        {
+            for (int i = 0; i < size; i++)
+                input >> maze[i][j];
+        }
+        input.close();
+    }
 }
 
 
