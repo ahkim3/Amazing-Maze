@@ -118,31 +118,26 @@ void mazeTraverse(char maze[12][12], int size, int& xCurrent, int& yCurrent,
             }
 
             // Move onto next step in maze
-            if ((xCurrent != 0 && xCurrent != size && yCurrent != 0
-                && yCurrent != 0) || (xCurrent == BEGIN_X && yCurrent == BEGIN_Y))
+            switch (direction)
             {
-                switch (direction)
-                {
-                case Direction::DOWN:
-                    nextDirection = Direction::LEFT;
-                    yCurrent++;
-                    break;
-                case Direction::RIGHT:
-                    nextDirection = Direction::DOWN;
-                    xCurrent++;
-                    break;
-                case Direction::UP:
-                    nextDirection = Direction::RIGHT;
-                    yCurrent--;
-                    break;
-                case Direction::LEFT:
-                    nextDirection = Direction::UP;
-                    xCurrent--;
-                    break;
-                }
-                mazeTraverse(maze, size, xCurrent, yCurrent, nextDirection);
+            case Direction::DOWN:
+                nextDirection = Direction::LEFT;
+                yCurrent++;
+                break;
+            case Direction::RIGHT:
+                nextDirection = Direction::DOWN;
+                xCurrent++;
+                break;
+            case Direction::UP:
+                nextDirection = Direction::RIGHT;
+                yCurrent--;
+                break;
+            case Direction::LEFT:
+                nextDirection = Direction::UP;
+                xCurrent--;
+                break;
             }
-
+            mazeTraverse(maze, size, xCurrent, yCurrent, nextDirection);
         }
     }
     // Check if maze is unsolvable (boundary is breached)
