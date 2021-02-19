@@ -69,7 +69,7 @@ void mazeTraverse(char maze[12][12], int size, int xCurrent, int yCurrent,
     maze[xCurrent][yCurrent] = 'X'; // Places an X at current position
 
     // Briefly wait and print new step in maze
-    Sleep(300);
+    Sleep(30);
     system("cls");
     printMaze(maze, size);
 
@@ -77,7 +77,7 @@ void mazeTraverse(char maze[12][12], int size, int xCurrent, int yCurrent,
 
     // Continues onto next position if maze is neither solved nor unsolvable
     if (!(isSolved(size, xCurrent, yCurrent) 
-        && (xCurrent == BEGIN_X && yCurrent == BEGIN_Y)))
+        ))
     {
         directionFound = false;
 
@@ -131,6 +131,10 @@ void mazeTraverse(char maze[12][12], int size, int xCurrent, int yCurrent,
             break;
         }
     }
+
+    // Check if maze is unsolvable
+    else if (xCurrent == BEGIN_X && yCurrent == BEGIN_Y)
+        cout << "Maze is unsolvable." << endl;
 }
 
 
