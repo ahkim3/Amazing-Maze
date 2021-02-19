@@ -65,12 +65,16 @@ void mazeTraverse(char maze[12][12], int size, int xCurrent, int yCurrent,
 {
     maze[xCurrent][yCurrent] = 'X'; // Places an X at current position
 
-    // Decide if maze has been solved
-    if (!isSolved(size, xCurrent, yCurrent))
+    printMaze(maze, size);
+
+    // Continues onto next position if maze is neither solved nor unsolvable
+    if (!(isSolved(size, xCurrent, yCurrent) 
+        || (xCurrent == BEGIN_X && yCurrent == BEGIN_Y)))
     {
+        // Cycle through direction possibilities
+        
 
     }
-    // Check if current position is start position (meaning unsolvable)
 
     // Cycle through direction possibilities
         // NTS: For each that would give a valid move, make a recursive call 
