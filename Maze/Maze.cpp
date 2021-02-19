@@ -85,8 +85,9 @@ void mazeTraverse(char maze[12][12], int size, int xCurrent, int yCurrent,
 // Determine if moving to a specified position in a maze is allowed
 bool validMove(char maze[12][12], int xCoord, int yCoord)
 {
-
-    return false;
+    if (maze[xCoord][yCoord] == '#') // Specified position is a border
+        return false;
+    return true;
 }
 
 
