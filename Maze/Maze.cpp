@@ -94,6 +94,11 @@ bool validMove(char maze[12][12], int xCoord, int yCoord)
 // Determines if exit of maze has been found
 bool isSolved(int size, int xCurrent, int yCurrent)
 {
+    // Edge of array (exit) has been reached AND it's not the entrance
+    if ((xCurrent != BEGIN_X && yCurrent != BEGIN_Y)
+        && (xCurrent == 0 || xCurrent == size 
+            || yCurrent == 0 || yCurrent == size))
+        return true;
     return false;
 }
 
