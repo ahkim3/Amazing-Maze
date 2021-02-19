@@ -12,6 +12,7 @@ Signature: Andrew Kim
 
 #include <iostream>
 #include <fstream>
+#include <Windows.h>
 
 using namespace std;
 
@@ -67,7 +68,7 @@ void mazeTraverse(char maze[12][12], int size, int xCurrent, int yCurrent,
 
     maze[xCurrent][yCurrent] = 'X'; // Places an X at current position
 
-    system("pause");
+    Sleep(300);
     system("cls");
     printMaze(maze, size);
 
