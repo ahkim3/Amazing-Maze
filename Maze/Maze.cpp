@@ -52,10 +52,10 @@ int main()
     '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'
     };
 
-    Direction nextDirection = Direction::DOWN;
+    Direction nextDirection = Direction::DOWN; // Initial direction attempt
 
     mazeTraverse(maze, 12, BEGIN_X, BEGIN_Y, nextDirection);
-    printMaze(maze, 12);
+    //printMaze(maze, 12);
 }
 
 
@@ -63,17 +63,41 @@ int main()
 void mazeTraverse(char maze[12][12], int size, int xCurrent, int yCurrent, 
     Direction nextDirection)
 {
+
     maze[xCurrent][yCurrent] = 'X'; // Places an X at current position
 
+    system("pause");
+    system("cls");
     printMaze(maze, size);
+    
 
     // Continues onto next position if maze is neither solved nor unsolvable
     if (!(isSolved(size, xCurrent, yCurrent) 
         || (xCurrent == BEGIN_X && yCurrent == BEGIN_Y)))
     {
         // Cycle through direction possibilities
-        
-
+        if (validMove(maze, xCurrent, yCurrent))
+        {
+            switch (nextDirection)
+            {
+            case Direction::DOWN:
+                mazeTraverse(maze, size, xCurrent, yCurrent + 1, 
+                    nextDirection);
+                break;
+            case Direction::RIGHT:
+                mazeTraverse(maze, size, xCurrent + 1, yCurrent,
+                    nextDirection);
+                break;
+            case Direction::UP:
+                mazeTraverse(maze, size, xCurrent, yCurrent - 1,
+                    nextDirection);
+                break;
+            case Direction::LEFT:
+                mazeTraverse(maze, size, xCurrent - 1, yCurrent,
+                    nextDirection);
+                break;
+            }
+        }
     }
 
     // Cycle through direction possibilities
@@ -106,9 +130,9 @@ bool isSolved(int size, int xCurrent, int yCurrent)
 // Prints the maze
 void printMaze(char maze[12][12], int size)
 {
-    for (int i = 0; i < size; i++)
+    for (int j = 0; j < size; j++)
     {
-        for (int j = 0; j < size; j++)
+        for (int i = 0; i < size; i++)
             cout << maze[i][j] << ' ';
         cout << endl;
     }
