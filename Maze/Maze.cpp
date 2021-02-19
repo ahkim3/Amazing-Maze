@@ -62,40 +62,80 @@ void fill(char maze[12][12], int size, string inputFileName)
 void mazeTraverse(char maze[12][12], int size, int xCurrent, int yCurrent, 
     Direction nextDirection)
 {
+    bool directionFound;
 
     maze[xCurrent][yCurrent] = 'X'; // Places an X at current position
 
     system("pause");
     system("cls");
     printMaze(maze, size);
-    
 
     // Continues onto next position if maze is neither solved nor unsolvable
     if (!(isSolved(size, xCurrent, yCurrent) 
         && (xCurrent == BEGIN_X && yCurrent == BEGIN_Y)))
     {
-        // Cycle through direction possibilities
-        if (validMove(maze, xCurrent, yCurrent))
+        directionFound = false;
+
+        // Cycle through direction possibilities to find a valid direction
+        while (!directionFound)
         {
+            // Tests a single direction
             switch (nextDirection)
             {
             case Direction::DOWN:
-                mazeTraverse(maze, size, xCurrent, yCurrent + 1, 
-                    nextDirection);
+                if (validMove(maze, xCurrent, yCurrent + 1))
+                    directionFound = true;
                 break;
             case Direction::RIGHT:
-                mazeTraverse(maze, size, xCurrent + 1, yCurrent,
-                    nextDirection);
+                if (validMove(maze, xCurrent + 1, yCurrent))
+                    directionFound = true;
                 break;
             case Direction::UP:
-                mazeTraverse(maze, size, xCurrent, yCurrent - 1,
-                    nextDirection);
+                if (validMove(maze, xCurrent, yCurrent - 1))
+                    directionFound = true;
                 break;
             case Direction::LEFT:
-                mazeTraverse(maze, size, xCurrent - 1, yCurrent,
-                    nextDirection);
+                if (validMove(maze, xCurrent - 1, yCurrent))
+                    directionFound = true;
                 break;
             }
+
+            // Moves onto a different direction if original wasn't valid
+            if (!directionFound)
+            {
+                switch (nextDirection)
+                {
+                case Direction::DOWN:
+                    nextDirection = Direction::RIGHT;
+                    break;
+                case Direction::RIGHT:
+                    nextDirection = Direction::UP;
+                    break;
+                case Direction::UP:
+                    nextDirection = Direction::LEFT;
+                    break;
+                case Direction::LEFT:
+                    nextDirection = Direction::DOWN;
+                    break;
+                }
+            }
+        }
+
+        // Move onto next step in maze
+        switch (nextDirection)
+        {
+        case Direction::DOWN:
+            mazeTraverse(maze, size, xCurrent, yCurrent + 1, nextDirection);
+            break;
+        case Direction::RIGHT:
+            mazeTraverse(maze, size, xCurrent + 1, yCurrent, nextDirection);
+            break;
+        case Direction::UP:
+            mazeTraverse(maze, size, xCurrent, yCurrent - 1, nextDirection);
+            break;
+        case Direction::LEFT:
+            mazeTraverse(maze, size, xCurrent - 1, yCurrent, nextDirection);
+            break;
         }
     }
 
