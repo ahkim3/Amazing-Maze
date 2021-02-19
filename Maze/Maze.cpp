@@ -16,7 +16,7 @@ Signature: Andrew Kim
 
 using namespace std;
 
-const enum Entrance { BEGIN_X = 0, BEGIN_Y = 2 }; // Position of entrance to maze
+enum Entrance { BEGIN_X = 0, BEGIN_Y = 2 }; // Position of entrance to maze
 enum class Direction {DOWN, RIGHT, UP, LEFT};
 
 void fill(char[12][12], int, string);
@@ -67,81 +67,89 @@ void mazeTraverse(char maze[12][12], int size, int& xCurrent, int& yCurrent,
     Direction nextDirection;
     char previousChar = maze[xCurrent][yCurrent];
 
-    maze[xCurrent][yCurrent] = 'X'; // Places an X at current position
-
-    // Briefly wait and print new step in maze
-    Sleep(30);
-    system("cls");
-    printMaze(maze, size);
-
-    maze[xCurrent][yCurrent] = previousChar; // Replaces X with original char
-
-    // Continues onto next position if maze is neither solved nor unsolvable
-    if (!(isSolved(size, xCurrent, yCurrent) 
-        ))
+    // Enforces array boundaries
+    if (xCurrent >= 0 && yCurrent >= 0 && xCurrent < size && yCurrent < size)
     {
-        directionFound = false;
+        maze[xCurrent][yCurrent] = 'X'; // Places an X at current position
 
-        // Cycle through directions while a valid direction is not found
-        while (!directionFound)
+        // Briefly wait and print new step in maze
+        Sleep(30);
+        system("cls");
+        printMaze(maze, size);
+
+        maze[xCurrent][yCurrent] = previousChar; // Replaces X with original char
+
+        // Continues onto next position if maze is neither solved nor unsolvable
+        if (!(isSolved(size, xCurrent, yCurrent)))
         {
-            // Tests a direction, moves onto a different direction not valid
-            switch (direction)
+            directionFound = false;
+
+            // Cycle through directions while a valid direction is not found
+            while (!directionFound)
             {
-            case Direction::DOWN:
-                if (validMove(maze, xCurrent, yCurrent + 1))
-                    directionFound = true;
-                else
-                    direction = Direction::RIGHT;
-                break;
-            case Direction::RIGHT:
-                if (validMove(maze, xCurrent + 1, yCurrent))
-                    directionFound = true;
-                else
-                    direction = Direction::UP;
-                break;
-            case Direction::UP:
-                if (validMove(maze, xCurrent, yCurrent - 1))
-                    directionFound = true;
-                else
-                    direction = Direction::LEFT;
-                break;
-            case Direction::LEFT:
-                if (validMove(maze, xCurrent - 1, yCurrent))
-                    directionFound = true;
-                else
-                    direction = Direction::DOWN;
-                break;
+                // Tests a direction, moves onto a different direction not valid
+                switch (direction)
+                {
+                case Direction::DOWN:
+                    if (validMove(maze, xCurrent, yCurrent + 1))
+                        directionFound = true;
+                    else
+                        direction = Direction::RIGHT;
+                    break;
+                case Direction::RIGHT:
+                    if (validMove(maze, xCurrent + 1, yCurrent))
+                        directionFound = true;
+                    else
+                        direction = Direction::UP;
+                    break;
+                case Direction::UP:
+                    if (validMove(maze, xCurrent, yCurrent - 1))
+                        directionFound = true;
+                    else
+                        direction = Direction::LEFT;
+                    break;
+                case Direction::LEFT:
+                    if (validMove(maze, xCurrent - 1, yCurrent))
+                        directionFound = true;
+                    else
+                        direction = Direction::DOWN;
+                    break;
+                }
             }
-        }
-        
-        // Move onto next step in maze
-        switch (direction)
-        {
-        case Direction::DOWN:
-            nextDirection = Direction::LEFT;
-            yCurrent++;
-            break;
-        case Direction::RIGHT:
-            nextDirection = Direction::DOWN;
-            xCurrent++;
-            break;
-        case Direction::UP:
-            nextDirection = Direction::RIGHT;
-            yCurrent--;
-            break;
-        case Direction::LEFT:
-            nextDirection = Direction::UP;
-            xCurrent--;
-            break;
-        }
-        mazeTraverse(maze, size, xCurrent, yCurrent, nextDirection);
 
+            // Move onto next step in maze
+            if ((xCurrent != 0 && xCurrent != size && yCurrent != 0 
+                && yCurrent != 0) || (xCurrent == BEGIN_X && yCurrent == BEGIN_Y))
+            {
+                switch (direction)
+                {
+                case Direction::DOWN:
+                    nextDirection = Direction::LEFT;
+                    yCurrent++;
+                    break;
+                case Direction::RIGHT:
+                    nextDirection = Direction::DOWN;
+                    xCurrent++;
+                    break;
+                case Direction::UP:
+                    nextDirection = Direction::RIGHT;
+                    yCurrent--;
+                    break;
+                case Direction::LEFT:
+                    nextDirection = Direction::UP;
+                    xCurrent--;
+                    break;
+                }
+                mazeTraverse(maze, size, xCurrent, yCurrent, nextDirection);
+            }
+
+        }
     }
 
     // Check if maze is unsolvable
     else if (xCurrent == BEGIN_X && yCurrent == BEGIN_Y)
         cout << "Maze is unsolvable." << endl;
+    
 }
 
 
