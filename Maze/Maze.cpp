@@ -36,7 +36,6 @@ int main()
     Direction direction = Direction::DOWN; // Initial direction attempt
 
     mazeTraverse(maze, 12, xS, yS, direction);
-    //printMaze(maze, 12);
 }
 
 
