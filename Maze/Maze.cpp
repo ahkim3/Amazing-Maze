@@ -147,7 +147,10 @@ void mazeTraverse(char maze[12][12], int size, int& xCurrent, int& yCurrent,
     }
 
     // Check if maze is unsolvable
-    else if (xCurrent == BEGIN_X && yCurrent == BEGIN_Y)
+    else if ((xCurrent == BEGIN_X - 1 && yCurrent == BEGIN_Y)
+        || (xCurrent == BEGIN_X && yCurrent == BEGIN_Y - 1)
+        || (xCurrent == size + 1 && yCurrent == size)
+        || (xCurrent == size && yCurrent == size + 1))
         cout << "Maze is unsolvable." << endl;
     
 }
