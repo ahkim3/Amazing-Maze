@@ -64,12 +64,16 @@ void mazeTraverse(char maze[12][12], int size, int xCurrent, int yCurrent,
     Direction nextDirection)
 {
     bool directionFound;
+    char previousChar = maze[xCurrent][yCurrent];
 
     maze[xCurrent][yCurrent] = 'X'; // Places an X at current position
 
+    // Briefly wait and print new step in maze
     Sleep(300);
     system("cls");
     printMaze(maze, size);
+
+    maze[xCurrent][yCurrent] = previousChar; // Replaces X with original char
 
     // Continues onto next position if maze is neither solved nor unsolvable
     if (!(isSolved(size, xCurrent, yCurrent) 
