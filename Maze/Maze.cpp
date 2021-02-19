@@ -14,7 +14,7 @@ Signature: Andrew Kim
 
 using namespace std;
 
-const enum ENTRANCE { beginX = 0, beginY = 2 }; // Position of entrance to maze
+const enum ENTRANCE { BEGIN_X = 0, BEGIN_Y = 2 }; // Position of entrance to maze
 
 void mazeTraverse(char[12][12], int, int, int, int);
 bool validMove(char[12][12], int, int);
@@ -24,6 +24,8 @@ void printMaze(char[12][12], int);
 
 int main()
 {
+    enum class Direction {DOWN, RIGHT, UP, LEFT};
+
     // Initializes maze
     char maze[12][12] = {
     '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#',
@@ -51,6 +53,9 @@ int main()
     '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#'
     };
 
+    Direction nextDirection = Direction::DOWN;
+
+    mazeTraverse(maze, 12, BEGIN_X, BEGIN_Y, 1); // 1 for direction means 
     printMaze(maze, 12);
 }
 
