@@ -4,7 +4,7 @@
 
 ## Prompt
 
-![Curved Lab Prompt](https://github.com/ahkim3/Amazing-Maze/blob/main/Maze/Amazing%20Maze%20Prompt.png?raw=true "Prompt")
+![Amazing Maze Prompt](https://github.com/ahkim3/Amazing-Maze/blob/main/Maze/Amazing%20Maze%20Prompt.png?raw=true "Prompt")
 
 ## Authors
 - Andrew Kim
